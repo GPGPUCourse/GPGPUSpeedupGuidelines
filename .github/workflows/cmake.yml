@@ -22,12 +22,11 @@ jobs:
     - name: Install OpenCL driver for CPU
       run: sudo bash .github/scripts/install_intel_opencl.sh;
 
+    - name: Install CUDA SDK
+      run: sudo bash .github/scripts/install_cuda.sh;
+
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-
-    - name: aplusb
-      working-directory: ${{github.workspace}}
-      run: ./build/aplusb
