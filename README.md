@@ -64,7 +64,7 @@
 # Ориентиры
 
 Здесь предложена трансляция в CUDA на примере задачи C=A+B, трансляция не исчерпывающая, но во многих простых случаях должна работать.
-Она реализована благодаря файлу с макросами которые транслируют OpenCL вызовы в CUDA вызовы - [libs/gpu/libgpu/cuda/cu/opencl_translator.cu](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/libs/gpu/libgpu/cuda/cu/opencl_translator.cu).
+Она реализована благодаря файлу с макросами которые транслируют OpenCL вызовы в CUDA вызовы - [libs/gpu/libgpu/cuda/cu/opencl_translator.cu](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/libs/gpu/libgpu/cuda/cu/opencl_translator.cu).
 
 Дополнительные ориентиры:
 
