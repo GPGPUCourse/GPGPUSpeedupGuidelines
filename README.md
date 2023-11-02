@@ -2,28 +2,28 @@
 
 # Используем профилировщик/санитайзер
 
-1) [Статья 01:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/101_how_to_profile.markdown) как установить NVIDIA драйвер и CUDA, пример запуска профилировщика **NVIDIA Nsight Compute** для задачи суммирования двух векторов
-2) [Статья 02:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/102_how_to_sanitize.markdown) как запустить санитайзер **compute-sanitizer --tool initcheck** для проверки что вся видеопамять была инициализирована (не считываем случайный мусор)
-3) [Статья 03:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/103_sum.markdown) на примере задачи суммирования элементов массива исследуем и профилируем:
+1) [Статья 01:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/101_how_to_profile.markdown) как установить NVIDIA драйвер и CUDA, пример запуска профилировщика **NVIDIA Nsight Compute** для задачи суммирования двух векторов
+2) [Статья 02:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/102_how_to_sanitize.markdown) как запустить санитайзер **compute-sanitizer --tool initcheck** для проверки что вся видеопамять была инициализирована (не считываем случайный мусор)
+3) [Статья 03:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/103_sum.markdown) на примере задачи суммирования элементов массива исследуем и профилируем:
 - 3.1) Как отладить ошибку через ```printf``` со стороны кернела на видеокарте
 - 3.2) Иногда кэш спасает скорость работы кернела вопреки **non-coalesced** паттерну доступа
 - 3.3) Иногда кэш спасает скорость работы кернела вопреки **non-coalesced** паттерну доступа
 3.4) Как помешать кэшу спасать нас
-4) [Статья 04:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/104_sum_local_reduction_races.markdown) на примере задачи суммирования элементов массива через редукцию в локальной памяти:
+4) [Статья 04:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/104_sum_local_reduction_races.markdown) на примере задачи суммирования элементов массива через редукцию в локальной памяти:
 - 4.1) Как проверить нет ли в кернеле гонок в обращениях к локальной памяти (**compute-sanitizer --tool racecheck**)
 - 4.2) Какие есть виды гонок (на примере **RAW**, **WAR** гонок)
-5) [Статья 05:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/105_sum_local_reduction_out_of_bounds.markdown) на примере задачи суммирования элементов массива через редукцию проверяем что обращение за пределами массива легко поймать (**compute-sanitizer --tool memcheck**)
-6) [Статья 06:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/106_sum_local_reduction_profiling.markdown) на примере задачи суммирования элементов массива через редукцию анализируем поведение программы через **Timeline** визуализацию в  **NVIDIA Nsight Compute**
+5) [Статья 05:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/105_sum_local_reduction_out_of_bounds.markdown) на примере задачи суммирования элементов массива через редукцию проверяем что обращение за пределами массива легко поймать (**compute-sanitizer --tool memcheck**)
+6) [Статья 06:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/106_sum_local_reduction_profiling.markdown) на примере задачи суммирования элементов массива через редукцию анализируем поведение программы через **Timeline** визуализацию в  **NVIDIA Nsight Compute**
 
 # Примеры профилирования/ускорения
 
-11) **[Пример](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/111_vulkan_slow_vram_to_ram.markdown) профилирования и ускорения:** случай когда тормозит трансфер данных на Vulkan (```VRAM -> CPU```) - помогает увидеть timeline + видеть в логе строку вида ```processing done in 1234 s = 20% IO + 10% CPU + 5% upload to VRAM + 30% GPU + 35% read from VRAM``` + взвешивать килограммами
+11) **[Пример](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/111_vulkan_slow_vram_to_ram.markdown) профилирования и ускорения:** случай когда тормозит трансфер данных на Vulkan (```VRAM -> CPU```) - помогает увидеть timeline + видеть в логе строку вида ```processing done in 1234 s = 20% IO + 10% CPU + 5% upload to VRAM + 30% GPU + 35% read from VRAM``` + взвешивать килограммами
 
-12) **[Пример](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/112_two_threads.markdown) профилирования и ускорения:** в случае когда CPU-часть занимает существенную долю времени (например 40%) - какой потенциальный прирост от обработки в два потока? А если ситуация другая - 80% времени CPU и 20% GPU?  Что с этим делать?
+12) **[Пример](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/112_two_threads.markdown) профилирования и ускорения:** в случае когда CPU-часть занимает существенную долю времени (например 40%) - какой потенциальный прирост от обработки в два потока? А если ситуация другая - 80% времени CPU и 20% GPU?  Что с этим делать?
 
-13) **[Пример](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/113_camera_to_world_to_camera.markdown) профилирования и ускорения:** если есть переход из локальной системы координат **камеры A** в **мир**, и затем из **мира** в локальную систему координат второй **камеры B**
+13) **[Пример](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/113_camera_to_world_to_camera.markdown) профилирования и ускорения:** если есть переход из локальной системы координат **камеры A** в **мир**, и затем из **мира** в локальную систему координат второй **камеры B**
 
-14) **[Пример](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/114_transform_approximation.markdown) профилирования и ускорения:** если какой-то кусок-патч картинки нужно целиком подвергнуть сложной трансформации - вместо проецирования каждого пикселя этого патча - проецируем центр и производные рассчитываем, получили чуть загрубленую трансформацию
+14) **[Пример](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/114_transform_approximation.markdown) профилирования и ускорения:** если какой-то кусок-патч картинки нужно целиком подвергнуть сложной трансформации - вместо проецирования каждого пикселя этого патча - проецируем центр и производные рассчитываем, получили чуть загрубленую трансформацию
 
 # Примеры общего подхода
 
@@ -64,11 +64,11 @@
 # Ориентиры
 
 Здесь предложена трансляция в CUDA на примере задачи C=A+B, трансляция не исчерпывающая, но во многих простых случаях должна работать.
-Она реализована благодаря файлу с макросами которые транслируют OpenCL вызовы в CUDA вызовы - [libs/gpu/libgpu/cuda/cu/opencl_translator.cu](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/libs/gpu/libgpu/cuda/cu/opencl_translator.cu).
+Она реализована благодаря файлу с макросами которые транслируют OpenCL вызовы в CUDA вызовы - [libs/gpu/libgpu/cuda/cu/opencl_translator.cu](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/libs/gpu/libgpu/cuda/cu/opencl_translator.cu).
 
 Дополнительные ориентиры:
 
- - [CMakeLists.txt](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/CMakeLists.txt#L28-L32): Поиск CUDA-компилятора, добавление для NVCC компилятора флажка 'сохранять номера строк' (нужно чтобы cuda-memcheck мог указывать номера строк с ошибками), добавление ```src/cu/aplusb.cu``` в список исходников, компиляция через ```cuda_add_executable```.
- - [aplusb.cu](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/src/cu/aplusb.cu): CUDA-кернел транслируется из OpenCL-кернела посредством [макросов](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/libs/gpu/libgpu/cuda/cu/opencl_translator.cu), вызов кернела через функцию ```cuda_aplusb```
- - **main_aplusb.cpp**: [декларация](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/src/main_aplusb.cpp#L28-L30) функции ```cuda_aplusb```, [инициализация](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/src/main_aplusb.cpp#L59) CUDA-контекста, [вызов](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/cuda/src/main_aplusb.cpp#L111) функции вызывающий кернел
+ - [CMakeLists.txt](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/CMakeLists.txt#L29-L34): Поиск CUDA-компилятора, добавление для NVCC компилятора флажка 'сохранять номера строк' (нужно чтобы cuda-memcheck мог указывать номера строк с ошибками), компиляция через ```cuda_add_executable```.
+ - [aplusb.cu](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/src/cu/01_aplusb.cu): CUDA-кернел транслируется из OpenCL-кернела посредством [макросов](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/libs/gpu/libgpu/cuda/cu/opencl_translator.cu), вызов кернела через функцию ```cuda_aplusb```
+ - **main01_aplusb.cpp**: [декларация](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/src/main01_aplusb.cpp#L28-L30) функции ```cuda_aplusb```, [инициализация](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/src/main01_aplusb.cpp#L59) CUDA-контекста, [вызов](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/src/main01_aplusb.cpp#L112) функции вызывающий кернел
  - [Запись лекции](https://youtu.be/REKRZavy0_s?t=3176) с одного из прошлых прочтений - есть пояснения про этот транслятор и про отличия CUDA
