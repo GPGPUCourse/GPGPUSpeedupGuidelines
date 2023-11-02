@@ -1,5 +1,7 @@
 [Остальные задания](https://github.com/GPGPUCourse/).
 
+[![Build Status](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/actions/workflows/cmake.yml/badge.svg?branch=main&event=push)](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/actions/workflows/cmake.yml)
+
 # Используем профилировщик/санитайзер
 
 1) [Статья 01:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/101_how_to_profile.markdown) как установить NVIDIA драйвер и CUDA, пример запуска профилировщика **NVIDIA Nsight Compute** для задачи суммирования двух векторов
