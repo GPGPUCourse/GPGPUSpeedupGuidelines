@@ -3,6 +3,10 @@
 
 #ifdef __CLION_IDE__
 
+#ifndef STATIC_KEYWORD
+#define STATIC_KEYWORD static
+#endif
+
 #define __kernel
 #define __global
 #define __local
@@ -52,7 +56,6 @@ float4		vloada_half4	(size_t offset, const half *p);
 void		vstorea_half4	(float4 data, size_t offset, half *p);
 
 // https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/workItemFunctions.html
-uint	get_work_dim		();
 size_t	get_global_size		(uint dimindx);
 size_t	get_global_id		(uint dimindx);
 size_t	get_local_size		(uint dimindx);
@@ -60,14 +63,12 @@ size_t	get_local_id		(uint dimindx);
 size_t	get_num_groups		(uint dimindx);
 size_t	get_group_id		(uint dimindx);
 size_t	get_global_offset	(uint dimindx);
+uint	get_work_dim		();
 
-#ifndef STATIC_KEYWORD
-#define STATIC_KEYWORD static
-#endif
-
-#endif
-
+// Defined in libs/gpu/libgpu/opencl/engine.cpp:584
 // 64 for AMD, 32 for NVidia, 8 for intel GPUs, 1 for CPU
 #define WARP_SIZE 64
+
+#endif
 
 #endif // pragma once
