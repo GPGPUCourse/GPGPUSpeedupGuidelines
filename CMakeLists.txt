@@ -36,7 +36,7 @@ else()
     message(WARNING "CUDA not found!")
     add_executable(main01_aplusb src/main01_aplusb.cpp src/cl/01_aplusb_cl.h)
     add_executable(main52_sum src/main52_sum.cpp src/cl/52_sum_cl.h)
-    add_executable(main53_sum_local_reduction src/main53_sum_local_reduction.cpp)
+    add_executable(main53_sum_local_reduction src/main53_sum_local_reduction.cpp src/cl/53_sum_local_reduction_cl.h)
 endif()
 
 target_link_libraries(main01_aplusb libclew libgpu libutils)
