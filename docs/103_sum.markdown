@@ -269,3 +269,15 @@ void sum_3_no_cache_no_coalesced(__global const int* a,
 ![NVIDIA Nsight Compute comparison of large memory transfer due to non-coalesced memory access pattern](/docs/images/nvc_sum3_diff_large_transfer_non_coalesced.png?raw=true)
 
 Т.е. объем данных который действительно пришлось прогрузить из видеопамяти оказался на 658% больше, т.е. в x7.5 раз больше.
+
+```Упражнение``` Но казалось бы ведь у нас общее замедление времени выполнения около х32 раз, и мы бы ожидали что объем трансфера данных тоже вырастет в х32 раза? Попробуйте погуглить на эту тему.
+
+Оказывается что объем осуществленных трансферов данных вырос всего в х8 раз вместо х32 раз т.к. в [CUDA best practices](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#coalesced-access-to-global-memory) мы можем прочитать:
+
+```
+For devices of compute capability 6.0 or higher, the requirements can be summarized quite easily:
+the concurrent accesses of the threads of a warp will coalesce into a number of transactions
+equal to the number of 32-byte transactions necessary to service all of the threads of the warp.
+```
+
+Т.е. на самом деле реальные транзакции которые действительно производятся обладают размером в 32 байта.
