@@ -51,8 +51,8 @@ int main(int argc, char **argv)
     }
     context.activate();
 
-    unsigned int n=1*1000*1000;
-//    unsigned int n=100*1000*1000;
+    //unsigned int n=1*1000*1000;
+    unsigned int n=100*1000*1000;
     int max_value = std::numeric_limits<int>::max() / n; // таким образом гарантируем что нет переполнения
     std::vector<int> as(n, 0);
     FastRandom r(n);

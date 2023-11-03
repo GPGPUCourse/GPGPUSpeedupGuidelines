@@ -6,8 +6,6 @@
     #define STATIC_KEYWORD // говорим что это ключевое слово ничего не должно писать
 #endif
 
-#line 6
-
 STATIC_KEYWORD void sum_1(__global const int* a,
                           __global       int* sum,
                                 unsigned int  n) {
@@ -89,7 +87,7 @@ __kernel void sum_gpu(__global const int* a,
                       __global       int* sum,
                             unsigned int  n)
 {
-    sum_3(a, sum, n);
+    sum_2(a, sum, n);
 }
 
 __attribute__((reqd_work_group_size(WORKGROUP_SIZE, 1, 1)))
