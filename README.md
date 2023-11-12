@@ -2,10 +2,18 @@
 
 [![Build Status](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/actions/workflows/cmake.yml/badge.svg?branch=main&event=push)](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/actions/workflows/cmake.yml)
 
+# Видеозапись лекция (две части)
+
+<a href="https://www.youtube.com/watch?v=hqPvJ0sa_gQ"><img src="https://raw.githubusercontent.com/GPGPUCourse/GPGPUSpeedupGuidelines/master/.github/video_preview1.png" alt="Presentation on ICCV 2021" width="32%"/></a> <a href="https://www.youtube.com/watch?v=qnbxOv4xZcU"><img src="https://raw.githubusercontent.com/GPGPUCourse/GPGPUSpeedupGuidelines/master/.github/video_preview2.png" alt="Presentation on ICCV 2021" width="32%"/></a>
+
 # Используем профилировщик/санитайзер
 
+Первая лекция:
 1) [Статья 01:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/101_how_to_profile.markdown) как установить NVIDIA драйвер и CUDA, пример запуска профилировщика **NVIDIA Nsight Compute** для задачи суммирования двух векторов
 2) [Статья 02:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/102_how_to_sanitize.markdown) как запустить санитайзер **compute-sanitizer --tool initcheck** для проверки что вся видеопамять была инициализирована (не считываем случайный мусор)
+
+Вторая лекция:
+
 3) [Статья 03:](https://github.com/GPGPUCourse/GPGPUSpeedupGuidelines/blob/main/docs/103_sum.markdown) на примере задачи суммирования элементов массива исследуем и профилируем:
 - 3.1) Как отладить ошибку через ```printf``` со стороны кернела на видеокарте
 - 3.2) Иногда кэш спасает скорость работы кернела вопреки **non-coalesced** паттерну доступа
